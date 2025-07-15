@@ -1,7 +1,10 @@
+# backend-deployment.yaml file
+
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: backend-deployment
 spec:
   replicas: 1
   selector:
@@ -13,7 +16,8 @@ spec:
         app: backend
     spec:
       containers:
-      - name: backend
-        image: gunnapradeepreddy/devquotes-backend:latest
-        ports:
-        - containerPort: 3001
+        - name: backend
+          image: gunnapradeepreddy/devquotes-backend:latest
+          ports:
+            - containerPort: 3001
+

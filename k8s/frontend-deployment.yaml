@@ -1,7 +1,10 @@
+# frontend-deployment.yaml file:
+
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: frontend-deployment
 spec:
   replicas: 1
   selector:
@@ -13,7 +16,8 @@ spec:
         app: frontend
     spec:
       containers:
-      - name: frontend
-        image: gunnapradeepreddy/devquotes-frontend:latest
-        ports:
-        - containerPort: 3000
+        - name: frontend
+          image: gunnapradeepreddy/devquotes-frontend:latest
+          ports:
+            - containerPort: 3000
+

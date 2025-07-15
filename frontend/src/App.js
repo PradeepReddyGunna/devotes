@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 function App() {
   const [quotes, setQuotes] = useState([]);
-  const [newQuote, setNewQuote] = useState('');
+  const [text, setText] = useState('');
 
   useEffect(() => {
     fetch('/api/quotes')
@@ -10,36 +10,33 @@ function App() {
       .then(setQuotes);
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const res = await fetch('/api/quotes', {
+    fetch('/api/quotes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: newQuote })
+      body: JSON.stringify({ text })
+    })
+    .then(res => res.json())
+    .then(newQuote => {
+      setQuotes([...quotes, newQuote]);
+      setText('');
     });
-    const data = await res.json();
-    setQuotes([...quotes, data]);
-    setNewQuote('');
   };
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1>DevQuotes</h1>
+      <h1>💬 DevQuotes</h1>
       <form onSubmit={handleSubmit}>
-        <input
-          value={newQuote}
-          onChange={(e) => setNewQuote(e.target.value)}
-          placeholder="Add a new quote"
-        />
+        <input value={text} onChange={e => setText(e.target.value)} placeholder="Enter a quote" />
         <button type="submit">Submit</button>
       </form>
       <ul>
-        {quotes.map((q, i) => (
-          <li key={i}>{q.text}</li>
-        ))}
+        {quotes.map((q, i) => <li key={i}>{q.text}</li>)}
       </ul>
     </div>
   );
 }
 
 export default App;
+

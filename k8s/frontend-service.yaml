@@ -1,3 +1,6 @@
+# frontend-service.yaml file:
+
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -9,3 +12,4 @@ spec:
     - port: 80
       targetPort: 3000
   type: LoadBalancer
+
