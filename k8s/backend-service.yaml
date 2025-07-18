@@ -1,18 +1,17 @@
 # vi backend-service.yaml  file:
 
 
-# frontend-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend-service
+  name: backend-service
 spec:
   selector:
-    app: frontend
+    app: backend
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 3000
-  type: LoadBalancer
+      port: 3001
+      targetPort: 3001
+  type: ClusterIP
 
 
